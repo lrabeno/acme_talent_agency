@@ -24,7 +24,7 @@ class SingleSkill extends Component {
 }
 
 const mapStateToProps = (state, otherProps) => {
-    console.log('YOOOO OTHER PROPS', otherProps)
+    // console.log('YOOOO OTHER PROPS', otherProps)
     return state
 }
 

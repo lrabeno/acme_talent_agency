@@ -10,7 +10,7 @@ app.get('/', (req, res)=> res.sendFile(path.join(__dirname, './public/index.html
 app.get('/clients', async (req, res, next) => {
     try {
         const clients = await Client.findAll({
-            include: Skill
+            include: ClientSkills
         })
         res.send(clients)
     } catch (error) {
@@ -30,7 +30,7 @@ app.get('/clients/:id', async (req, res, next) => {
 app.get('/skills', async (req, res, next) => {
     try {
         const skills = await Skill.findAll({
-            include: Client
+            include: ClientSkills
         })
         res.send(skills)
     } catch (error) {
@@ -49,10 +49,13 @@ app.get('/skills/:id', async (req, res, next) => {
 
 app.get('/clientSkills', async (req, res, next) => {
     try {
-        const clientSkill = await Client.findAll({
-            include: {
+        const clientSkill = await ClientSkills.findAll({
+            include: [{
+                model: Client
+            },
+            {
                 model: Skill
-            }
+            }]
         })
         res.send(clientSkill)
     } catch (error) {
@@ -74,7 +77,7 @@ app.get('/clients/:clientId/:skillId', async (req, res, next) => {
     }
 })
 
-app.delete('/clients/:clientId/:skillId', async (req, res, next) => {
+app.delete('/client/:clientId/:skillId', async (req, res, next) => {
     try {
         const clientSkill = await ClientSkills.findOne({
             where: {
@@ -86,10 +89,11 @@ app.delete('/clients/:clientId/:skillId', async (req, res, next) => {
             res.sendStatus(404)
         } else {
             await clientSkill.destroy()
-            const clients = await Client.findAll({
-                include: Skill
-            })
-            res.send(clients)
+            // const clients = await Client.findAll({
+            //     include: Skill
+            // })
+            // res.send(clients)
+            res.sendStatus(204)
         }
     } catch (error) {
         console.log(error)

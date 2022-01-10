@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import store from "./store/index"
 import { getSkills } from './store/skills'
 import { getClients } from './store/clients'
 import Clients from './Clients'
@@ -23,8 +22,8 @@ class App extends Component {
         super()
     }
     async componentDidMount() {
-        store.dispatch(getClients())
-        store.dispatch(getSkills())
+        this.props.getClients()
+        this.props.getSkills()
     }
 
     render() {
@@ -46,9 +45,14 @@ class App extends Component {
 
 const mapStateToProps = (state) => state
 
-// // const mapDispatchToProps = (dispatch) => {
-// //     return {
-// //         // clients: ()=> dispatch(getClients())
-// //     }
-// // }
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = (dispatch) => {
+    return {
+       getClients: ()=> {
+           dispatch(getClients())
+       },
+       getSkills: ()=> {
+           dispatch(getSkills())
+       }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App)

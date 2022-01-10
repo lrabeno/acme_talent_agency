@@ -13,7 +13,7 @@ const Skills = ({skills}) => {
                     <h4 key={skill.id}>
                         <Link to={`/skill/${skill.id}`}>
                             {skill.name} 
-                            ({skill.clients.length})
+                            {/* ({skill.clients.length}) */}
                         </Link>
                     </h4>)
            })}

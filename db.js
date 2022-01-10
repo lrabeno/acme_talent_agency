@@ -22,10 +22,22 @@ const Skill = db.define('skill', {
     }
 })
 
-const ClientSkills = db.define('clientskills', {})
+const ClientSkills = db.define('clientskills', {
+    name: {
+        type: STRING
+    }
+})
 
-Client.belongsToMany(Skill, { through: 'clientskills' });
-Skill.belongsToMany(Client, { through: 'clientskills' });
+// Client.belongsToMany(Skill, { through: 'clientskills' });
+// Skill.belongsToMany(Client, { through: 'clientskills' });
+
+ClientSkills.belongsTo(Client);
+ClientSkills.belongsTo(Skill);
+Client.hasMany(ClientSkills);
+Skill.hasMany(ClientSkills);
+
+// Skill.belongsTo(Client)
+// Client.hasMany(Skill)
 
 const data = {
     clients: ['Danny', 'Johnny', 'Miguel', 'Samantha', 'Tori'],
@@ -52,12 +64,12 @@ const syncAndSeed = async() => {
     )
 
     await Promise.all([
-        ClientSkills.create({ clientId: danny.id, skillId: crane.id}),
-        ClientSkills.create({ clientId: danny.id, skillId: punch.id}),
-        ClientSkills.create({ clientId: johnny.id, skillId: sword.id}),
-        ClientSkills.create({ clientId: miguel.id, skillId: stars.id}),
-        ClientSkills.create({ clientId: samantha.id, skillId: nunchuk.id}),
-        ClientSkills.create({ clientId: tori.id, skillId: deathGrip.id}),
+        ClientSkills.create({ name: crane.name, clientId: danny.id, skillId: crane.id}),
+        ClientSkills.create({ name: punch.name, clientId: danny.id, skillId: punch.id}),
+        ClientSkills.create({ name: sword.name, clientId: johnny.id, skillId: sword.id}),
+        ClientSkills.create({ name: stars.name, clientId: miguel.id, skillId: stars.id}),
+        ClientSkills.create({ name: nunchuk.name, clientId: samantha.id, skillId: nunchuk.id}),
+        ClientSkills.create({ name: deathGrip.name, clientId: tori.id, skillId: deathGrip.id}),
     ])
 }
 

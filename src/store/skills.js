@@ -2,7 +2,7 @@ import axios from "axios";
 
 //----------SKILL ACTIONS-----------
 const GET_SKILLS = 'GET_SKILLS'
-const DELETE_SKILL = 'DELETE_SKILL'
+// const DELETE_SKILL = 'DELETE_SKILL'
 
 //------ SKILL ACTION CREATORS-------
 const _getSkills = (skills) => {

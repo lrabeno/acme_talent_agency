@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deleteSkill } from './store/clients'
+// import { deleteSkill } from './store/clients'
+import { getClientSkills } from './store/clientskill'
+import { deleteClientSkill } from './store/clientskill'
 
 
 class SingleClient extends Component {
     constructor() {
         super()
     }
-    // async componentDidMount() {
-    //     // store.dispatch(getClients())
-    //     store.dispatch(getSkills())
-    // }
+    async componentDidMount() {
+        this.props.getClientSkills()
+    }
 
     // componentDidUpdate(prevProps) {
     //     console.log('HELOOOOO PREV PROPS',prevProps)
@@ -18,7 +19,7 @@ class SingleClient extends Component {
 
     render() {
        const { byeSkill, history } = this.props
-       console.log('HERE ARE THIS>PROPS',this.props)
+    //    console.log('HERE ARE THIS>PROPS',this.props)
        const id = this.props.match.params.id * 1
        const clients = this.props.clients
        const client = clients.find(client => client.id === id)
@@ -26,18 +27,20 @@ class SingleClient extends Component {
            return null
        }
 
+    //    console.log('CLIENT FRON SINGLE CLIENT', client)
     return (
-        
         <div>
             <h3>{client.name} has these fighting skills.</h3>
                 <ul>
-                    {client.skills.map(
-                        skill => 
-                        <li key={skill.id}>
-                            {skill.name}
-                            {console.log('CLIENT ID',skill.clientskills.clientId)}
-                            {console.log('SKILL ID',skill.clientskills.skillId)}
-                            <button onClick={()=> byeSkill(skill.clientskills.clientId, skill.clientskills.skillId)}>DELETE</button>
+                    {client.clientskills.map(
+                        clientskill => 
+                        <li key={clientskill.id}>
+                            {console.log('HERES YOUR CLIENT SKILL ID', clientskill.id)}
+                            {clientskill.name}
+                            {console.log('CLIENT ID',clientskill.clientId)}
+                            {console.log('SKILL ID',clientskill.skillId)}
+                            {/* <button onClick={()=> byeSkill(clientskill.id)}>DELETE</button> */}
+                            <button onClick={()=> byeSkill(clientskill.clientId, clientskill.skillId)}>DELETE</button>
                         </li>)}
                 </ul>
         </div>
@@ -55,8 +58,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getClientSkills: () => {
+            dispatch(getClientSkills())
+        },
         byeSkill: (clientId, skillId)=> {
-            dispatch(deleteSkill(clientId, skillId))
+            dispatch(deleteClientSkill(clientId, skillId))
         }
     }
 }

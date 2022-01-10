@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 
 const Clients = ({clients}) => {
-    
+console.log('HIIIII CLIENTS', clients)
     return (
         <div>
                 <h2>---CLIENTS---</h2>
@@ -13,7 +13,7 @@ const Clients = ({clients}) => {
                         <h4 key={client.id}>
                             <Link to={`/client/${client.id}`}>
                                 {client.name} 
-                                ({client.skills.length})
+                                ({client.clientskills.length})
                             </Link>
                         </h4>)
                 })}

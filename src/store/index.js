@@ -3,12 +3,14 @@ import thunk from "redux-thunk"
 import logger from "redux-logger";
 import { clients } from "./clients";
 import { skills } from "./skills";
+import { clientskills } from "./clientskill";
 
 
 
 const reducer = combineReducers({
     clients,
-    skills
+    skills,
+    clientskills
 })
 
 
