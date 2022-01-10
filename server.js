@@ -86,7 +86,10 @@ app.delete('/clients/:clientId/:skillId', async (req, res, next) => {
             res.sendStatus(404)
         } else {
             await clientSkill.destroy()
-            res.sendStatus(204)
+            const clients = await Client.findAll({
+                include: Skill
+            })
+            res.send(clients)
         }
     } catch (error) {
         console.log(error)

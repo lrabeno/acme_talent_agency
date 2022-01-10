@@ -24,13 +24,6 @@ const Skill = db.define('skill', {
 
 const ClientSkills = db.define('clientskills', {})
 
-// ClientSkills.belongsTo(Client)
-// ClientSkills.belongsTo(Skill)
-
-// Client.belongsTo(Skill)
-// Client.hasMany(ClientSkills);
-// Skill.hasMany(ClientSkills);
-
 Client.belongsToMany(Skill, { through: 'clientskills' });
 Skill.belongsToMany(Client, { through: 'clientskills' });
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import store, {getClients, getSkills, getClientSkills} from "./store/index"
+import store from "./store/index"
+import { getSkills } from './store/skills'
+import { getClients } from './store/clients'
 import Clients from './Clients'
 import SingleClient from './SingleClient'
 import Skills from './Skills'

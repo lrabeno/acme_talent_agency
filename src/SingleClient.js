@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deleteSkill } from './store'
+import { deleteSkill } from './store/clients'
 
 
 class SingleClient extends Component {
@@ -45,7 +45,12 @@ class SingleClient extends Component {
     }
 }
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => {
+    return {
+        clients: state.clients,
+        skills: state.skills
+    }
+}
 
 
 const mapDispatchToProps = (dispatch) => {
