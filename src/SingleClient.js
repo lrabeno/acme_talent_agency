@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 // import { deleteSkill } from './store/clients'
 import { getClientSkills } from './store/clientskill'
-import { deleteClientSkill } from './store/clientskill'
+import { deleteClientSkill } from './store/clients'
 
 
 class SingleClient extends Component {
