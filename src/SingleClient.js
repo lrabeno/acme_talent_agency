@@ -26,7 +26,6 @@ class SingleClient extends Component {
        if (!client) {
            return null
        }
-
     //    console.log('CLIENT FRON SINGLE CLIENT', client)
     return (
         <div>
